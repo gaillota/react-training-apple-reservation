@@ -18,7 +18,11 @@ export class StationCard extends Component {
                 </header>
                 <div className="card-content">
                     <div className="content">
-                        <p>
+                        <div className={classNames({
+                            "notification": true,
+                            "is-success": open,
+                            "is-danger": !open
+                        })}>
                             <span className="icon is-small">
                                 <i className={classNames({
                                     "fa": true,
@@ -27,21 +31,27 @@ export class StationCard extends Component {
                                 })}></i>
                             </span>
                             <span>{open ? 'Ouvert' : 'Fermé'}</span>
-                        </p>
-                        <p>
+                        </div>
+                        <div className="notification">
                             <span className="icon is-small">
                                 <i className="fa fa-map-marker"></i>
                             </span>
                             <span>{station.address}</span>
-                        </p>
+                        </div>
+                        <div className="columns">
+                            <div className="column">
+                                <div className="notification is-primary has-text-centered">
+                                    <h1 className="title is-2">{station.available_bikes}</h1>
+                                </div>
+                            </div>
+                            <div className="column">
+                                <div className="notification is-danger has-text-centered">
+                                    <h1 className="title is-2">{station.available_bike_stands}</h1>
+                                </div>
+                            </div>
+                        </div>
                         <p>
-                            <span className="icon is-small">
-                                <i className="fa fa-credit-card"></i>
-                            </span>
-                            <span>{station.banking ? 'Oui' : 'Non'}</span>
-                        </p>
-                        <p>
-                            <progress className="progress is-large is-success" value={bikeLeft} max="100">50</progress>
+                            <progress className="progress is-large is-info" value={bikeLeft} max="100">50</progress>
                         </p>
                         <div className="is-cleafix"></div>
                         <span className="is-pulled-right">
