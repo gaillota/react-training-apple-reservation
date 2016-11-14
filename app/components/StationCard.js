@@ -38,10 +38,17 @@ export class StationCard extends Component {
                             </span>
                             <span>{station.address}</span>
                         </div>
+                        <div className="notification is-info has-text-centered">
+                            <h1 className="title is-2">
+                                {station.bike_stands}
+                            </h1>
+                        </div>
                         <div className="columns">
                             <div className="column">
-                                <div className="notification is-primary has-text-centered">
-                                    <h1 className="title is-2">{station.available_bikes}</h1>
+                                <div className="notification is-success has-text-centered">
+                                    <h1 className="title is-2">
+                                        {station.available_bikes}
+                                    </h1>
                                 </div>
                             </div>
                             <div className="column">
@@ -50,9 +57,9 @@ export class StationCard extends Component {
                                 </div>
                             </div>
                         </div>
-                        <p>
-                            <progress className="progress is-large is-info" value={bikeLeft} max="100">50</progress>
-                        </p>
+                        {/*<p>*/}
+                            {/*<progress className="progress is-large is-info" value={bikeLeft} max="100">50</progress>*/}
+                        {/*</p>*/}
                         <div className="is-cleafix"></div>
                         <span className="is-pulled-right">
                             <small>
