@@ -1,6 +1,7 @@
 var express = require('express');
 var path = require('path');
 var https = require('https');
+var fs = require('fs');
 
 // Webpack modules
 var webpack = require("webpack");
@@ -9,9 +10,10 @@ var webpackHotMiddleware = require("webpack-hot-middleware");
 
 // Webpack config
 var webpackConfig = require('./webpack.config');
+var config = require('./config');
 
 // Application port
-var port = 3000;
+var port = config.port || 3000;
 
 // Here we go
 var app = express();
@@ -29,41 +31,38 @@ app.use(webpackHotMiddleware(compiler));
 // Mount middleware at /public for static content only for request prefixed with /assets
 app.use('/assets', express.static(__dirname + '/public'));
 
-app.use('/stores', function(req, res) {
-    var storesUrl = 'https://reserve.cdn-apple.com/GB/en_GB/reserve/iPhone/stores.json';
-
-    https.get(storesUrl, function(res) {
+app.use('/stations', function(req, res) {
+    // Remote fetch
+    var path = "/stations?contract=Paris";
+    var url = config.api.baseUrl + path + "&apiKey=" + config.api.key;
+    
+    https.get(url, function(response) {
         var body = '';
-
-        res.on('data', function(chunk) {
+    
+        response.on('data', function(chunk) {
             body += chunk;
         });
-
-        res.on('end', function() {
+    
+        response.on('end', function() {
             res.end({
                 success: 1,
-                data: JSON.parse(body).stores || []
+                data: JSON.parse(body).stations || []
             });
         });
     }).on('error', function(e) {
-        console.log("Got error for URL "+storesUrl+" : ", e);
+        console.log("Got error for URL "+url+" : ", e);
         res.end({
             success: 0,
             message: e.message
         });
     });
-});
 
-app.use('/stocks', function(req, res) {
-    var stockUrl = 'https://reserve.cdn-apple.com/GB/en_GB/reserve/iPhone/availability.json';
-
-    res.send("done !");
-});
-
-app.use('/devices', function(req, res) {
-    var devicesUrl = 'https://reserve.cdn-apple.com/GB/en_GB/reserve/iPhone/product-offering.json';
-
-    res.send("done !");
+    // Local fetch
+    // var file = fs.readFileSync('./response.json');
+    // res.send({
+    //     success: 1,
+    //     data: JSON.parse(file)
+    // });
 });
 
 app.use('/', function (req, res) {
