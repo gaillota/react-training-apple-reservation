@@ -1,11 +1,18 @@
 import React, {Component} from "react";
 import {withGoogleMap, GoogleMap, Marker} from "react-google-maps";
+import MarkerClusterer from "react-google-maps/lib/addons/MarkerClusterer";
 
 const GoogleMapWrapper = withGoogleMap(props => (
-    <GoogleMap ref={props.onMapLoad} defaultZoom={11} defaultCenter={{ lat: 48.859512, lng: 2.347278 }}>
-        {props.markers.map(marker => (
-            <Marker {...marker} onClick={() => props.onMarkerClick(marker)} />
-        ))}
+    <GoogleMap ref={props.onMapLoad} defaultZoom={12} defaultCenter={{ lat: 48.859512, lng: 2.347278 }}>
+        <MarkerClusterer
+            averageCenter
+            enableRetinaIcons
+            gridSize={60}
+        >
+            {props.markers.map(marker => (
+                <Marker {...marker} onClick={() => props.onMarkerClick(marker)} />
+            ))}
+        </MarkerClusterer>
     </GoogleMap>
 ));
 

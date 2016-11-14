@@ -35,7 +35,7 @@ app.use('/stations', function(req, res) {
     // Remote fetch
     var path = "/stations?contract=Paris";
     var url = config.api.baseUrl + path + "&apiKey=" + config.api.key;
-    
+
     https.get(url, function(response) {
         var body = '';
     
@@ -44,14 +44,14 @@ app.use('/stations', function(req, res) {
         });
     
         response.on('end', function() {
-            res.end({
+            res.send({
                 success: 1,
-                data: JSON.parse(body).stations || []
+                data: JSON.parse(body) || []
             });
         });
     }).on('error', function(e) {
         console.log("Got error for URL "+url+" : ", e);
-        res.end({
+        res.send({
             success: 0,
             message: e.message
         });

@@ -3,6 +3,7 @@ import fetch from "isomorphic-fetch";
 
 import {Map} from "./Map";
 import {StationCard} from "./StationCard";
+import {Loading} from "./Loading";
 
 export class Stations extends Component {
     constructor(props) {
@@ -32,27 +33,29 @@ export class Stations extends Component {
         return (
             <div className="section">
                 <div className="container">
-                    <h1 className="title">Stations</h1>
-                    <hr/>
-                    <div className="columns">
-                        <div className="column is-8">
-                            <div className="card is-fullwidth">
-                                <header className="card-header">
-                                    <p className="card-header-title">
-                                        Stations map
-                                    </p>
-                                </header>
-                                <div className="card-content" style={{height: `500px`}}>
-                                    <Map stations={this.state.stations} handleMarkerClick={this.handleMarkerClick} />
+                    {this.state.loaded ? (
+                        <div className="columns">
+                            <div className="column is-8">
+                                <div className="card is-fullwidth">
+                                    <header className="card-header">
+                                        <p className="card-header-title">
+                                            Stations map
+                                        </p>
+                                    </header>
+                                    <div className="card-content" style={{height: `500px`}}>
+                                        <Map stations={this.state.stations} handleMarkerClick={this.handleMarkerClick} />
+                                    </div>
                                 </div>
                             </div>
+                            <div className="column is-4">
+                                {this.state.stationsSelected.map(station => (
+                                    <StationCard key={station.number} station={station} />
+                                ))}
+                            </div>
                         </div>
-                        <div className="column is-4">
-                            {this.state.stationsSelected.map(station => (
-                                <StationCard station={station} />
-                            ))}
-                        </div>
-                    </div>
+                    ) : (
+                        <Loading />
+                    )}
                 </div>
             </div>
         )
