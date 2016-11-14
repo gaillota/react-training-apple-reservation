@@ -1,2 +1,2 @@
-# react-training-apple-reservation
+# velib map
 [ReactJS] Training with Apple reservation API
