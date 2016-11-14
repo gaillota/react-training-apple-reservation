@@ -30,7 +30,7 @@ export class StationCard extends Component {
                                     "fa-times": !open
                                 })}></i>
                             </span>
-                            <span>{open ? 'Ouvert' : 'Fermé'}</span>
+                            <span>{open ? 'Open' : 'Close'}</span>
                         </div>
                         <div className="notification">
                             <span className="icon is-small">
