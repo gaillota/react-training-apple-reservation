@@ -9,8 +9,9 @@
 - fetch w/ Promise
 
 # Features
-/!\ This repo does **not** use Redux for state management.
-**However**, it uses a 3-level bidirectional data flow.
+###/!\ This repo does not use Redux for state management.
+
+**However**, it uses a 3-level bidirectional data flow:
 
 1. The *\<Stations>* component is a container wrapping two components: *\<Map>* and *\<StationCard>*.
 2. *\<Stations>* contains the `handleMarkerClick` function which is passed to the *\<Map>* component as `props`, which passes it to the *\<GoogleMapWrapper>* component, which also passes it to each *\<Marker>* component created.
