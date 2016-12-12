@@ -6,7 +6,7 @@
 - React Google Maps (with Clusters)
 - Bulma CSS
 - Webpack
-- fetch w/ Promise
+- Async fetch w/ Promise
 
 # Features
 ###/!\ This repo does not use Redux for state management.
