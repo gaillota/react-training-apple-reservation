@@ -4,10 +4,10 @@ import moment from "moment";
 
 export class StationCard extends Component {
     render() {
-        let station = this.props.station;
-        let open = station.status === "OPEN";
-        let formatDate = moment(station.last_update).format('HH:mm');
-        let bikeLeft = Math.round(station.available_bikes / station.bike_stands * 100);
+        const station = this.props.station;
+        const open = station.status === "OPEN";
+        const formatDate = moment(station.last_update).format('HH:mm');
+        const bikeLeft = Math.round(station.available_bikes / station.bike_stands * 100);
 
         return (
             <div className="card is-fullwidth">
