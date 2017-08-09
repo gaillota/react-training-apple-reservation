@@ -22,7 +22,7 @@ export class Stations extends Component {
     }
     
     handleMarkerClick(marker) {
-        let stations = this.state.stations.filter(station => station.number == marker.key);
+        const stations = this.state.stations.filter(station => station.number == marker.key);
 
         this.setState({
             stationsSelected: stations
